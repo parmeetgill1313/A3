@@ -37,11 +37,13 @@ public class employeeClient {  // begin class
         
         double wage;
         int hours;
+        double pay;
+        String output;
         
         //******************Create Ojects*************
         
         //ConsoleReader console = new ConsoleReader(System.in);
-        //DecimalFormat df = new DecimalFormat("00.00");
+        DecimalFormat df = new DecimalFormat("##.##");
         BufferedReader fin = new BufferedReader(new FileReader("input.txt"));
         PrintWriter fout = new PrintWriter(new BufferedWriter(new FileWriter("output.txt")));
         ProgramInfo programInfo3 = new ProgramInfo(" A3" + "Q1");
@@ -61,6 +63,10 @@ public class employeeClient {  // begin class
             hours = Integer.parseInt(list[0]);
             
             employee Employee = new employee(wage, hours );
+            pay = Employee.totPay();
+            
+            output = Employee.toString();
+            System.out.println(output);
             
             strin = fin.readLine();
         }

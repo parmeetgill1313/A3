@@ -1,3 +1,6 @@
+
+import java.text.DecimalFormat;
+
 /* **********************************************************
  * Programmer:	Rob Sveinson
  * Class:		CS20S
@@ -28,7 +31,10 @@
             private double wage = 0;
             private int hours = 0;
 
-            
+            double pay = 0;
+                double OTpay = 0;
+                double OThours = 0;
+                double totPay = 0;
  	// ********** constructors ***********
  	
             /********************************************************
@@ -54,7 +60,6 @@
                 id = nextID++; //set id and increment next id
                 wage = w;
                 hours = h;
-                System.out.println("ID: " + id + ", Waqe: " + wage + ", Hours: " + hours);
             }//end initiallized constructor
  
  	// ********** accessors **********
@@ -65,7 +70,7 @@
             *     in:         none 
             *     out:        radius
              ********************************************************/
-            private double getWage(){
+            public double getWage(){
                  return wage;
              } // end getWage()
             
@@ -75,7 +80,7 @@
             *     in:         none 
             *     out:        radius
             ********************************************************/
-            private double getHours(){
+            public double getHours(){
                  return hours;
              } // end gethours()
             
@@ -85,20 +90,19 @@
             *     in:         none 
             *     out:        radius
             ********************************************************/
-            private double totPay(){
+            public double totPay(){
                 
-                double pay = 0;
-                double OTpay = 0;
-                double OThours = 0;
-                double totPay = 0;
+                
             
                 if(hours > NormalHours){
                     OThours = (hours - NormalHours);
                     OTpay = OThours * (wage * OTpayMOD);
-                    pay =+ (hours - OThours) * wage;
+                    pay = (hours - OThours) * wage;
+                    totPay = pay + OTpay;
                 }//end if
                 else{
                     totPay = hours * wage;
+                    pay = totPay;
                 }//end else
                  return hours;
              } // end totPay()
@@ -106,12 +110,21 @@
             /********************************************************
             * Purpose:        get the radius of the circle 
             * Interface:
-            *     in:         none 
-            *     out:        radius
+            * in:         none 
+            * out:        radius
             ********************************************************/
-            public double toString(int r){
-                 System.out.println(this.totPay());
-                 return r;
+            public String toString(){
+                 String info = "";
+                 DecimalFormat df = new DecimalFormat("##.##");
+                 
+                 info = ("Employee: " + id + "\t");
+                 info += ("Hours: " + hours+ "\t");
+                 info += ("Wage: $" + wage+ "\t");
+                 info += ("Normal Hours Pay: $" + df.format(pay) + "\t\t");
+                 info += ("Overtime Pay: $" + df.format(OTpay) + "\t");
+                 info += ("Gross Pay: $" + df.format(totPay) + "\t\t");
+                 
+                 return info;
              } // end toString()
             
  	// ********** mutators **********
